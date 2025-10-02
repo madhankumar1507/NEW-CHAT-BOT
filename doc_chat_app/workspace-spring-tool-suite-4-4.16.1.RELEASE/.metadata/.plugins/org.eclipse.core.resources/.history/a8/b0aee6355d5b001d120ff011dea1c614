@@ -1,0 +1,10 @@
+package com.example.demo.Repositories;
+
+import com.example.demo.Entities.EmailEntity;
+public class EmailRepo {
+	String sendSimpleMail(EmailDetails details);
+	 
+    // Method
+    // To send an email with attachment
+    String sendMailWithAttachment(EmailDetails details);
+}

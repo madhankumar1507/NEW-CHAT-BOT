@@ -1,0 +1,29 @@
+package com.example.demo.Entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity(name="tb_Camera_Bookings_Details")
+public class CameraBookingsEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+	@Column(name="productNumber")
+	private String productNumber;
+	@Column(name="startDate")
+	private String startDate;
+	@Column(name="endDate")
+	private String endDate;
+	@Column(name="finalPrice")
+	private String finalPrice;
+	
+}

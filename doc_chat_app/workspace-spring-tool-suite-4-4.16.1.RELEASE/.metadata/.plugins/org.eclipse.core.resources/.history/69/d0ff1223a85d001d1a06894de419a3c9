@@ -1,0 +1,18 @@
+package com.example.demo.Services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.Beans.RentalRegistrationBean;
+import com.example.demo.Entities.CameraEntity;
+import com.example.demo.Repositories.RentalRegestrationRepo;
+
+public class RentalRegistrationService {
+ 
+	@Autowired
+	RentalRegestrationRepo rentalregestrationRepo;
+	
+	public CameraEntity saveRentalDetails(RentalRegistrationBean request) {
+		
+		return null;
+	}
+}

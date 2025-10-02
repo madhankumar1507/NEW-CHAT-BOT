@@ -1,0 +1,21 @@
+# Python virtual environment
+backend/venv/
+
+# PyTorch cache
+.torch/
+
+# ChromaDB persistence directory
+backend/vectordb/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Frontend node modules
+frontend/node_modules/
+
+# Frontend build output
+frontend/build/

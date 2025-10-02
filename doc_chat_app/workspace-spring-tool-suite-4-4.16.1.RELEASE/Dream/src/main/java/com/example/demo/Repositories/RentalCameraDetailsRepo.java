@@ -1,0 +1,13 @@
+package com.example.demo.Repositories;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.Entities.RentalCameraDetailsEntity;
+
+
+public interface RentalCameraDetailsRepo extends JpaRepository<RentalCameraDetailsEntity, Long> {
+	List<RentalCameraDetailsEntity> findByRentalCodeAndIsActiveTrue(String rentalCode);
+	RentalCameraDetailsEntity findByProductNumberAndIsActiveTrue(String productNumber);
+}

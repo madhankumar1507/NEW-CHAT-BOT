@@ -1,0 +1,32 @@
+package com.example.demo.Entities;
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity(name="tb_Authentication")
+public class AuthenticationEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+	@Column(name = "userName")
+	private String userName;
+	@Column(name="emailId")
+	private String emailId;
+	@Column(name = "password")
+	private String password;
+	@Column(name = "mobileNumber")
+	private String mobileNumber;
+	@Column(name = "registeredDate")
+	private String registeredDate;
+}
+

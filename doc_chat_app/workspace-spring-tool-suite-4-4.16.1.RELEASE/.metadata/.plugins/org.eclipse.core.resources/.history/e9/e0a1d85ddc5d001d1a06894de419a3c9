@@ -1,0 +1,57 @@
+package com.example.demo.Services;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Beans.BookingDetailsRequestBean;
+import com.example.demo.Beans.RentalRegistrationResponse;
+import com.example.demo.Entities.CameraBookingsEntity;
+import com.example.demo.Entities.CameraEntity;
+import com.example.demo.Repositories.CameraBookingsRepo;
+import com.example.demo.Repositories.RentalCameraDetailsRepo;
+import com.example.demo.Repositories.RentalRegestrationRepo;
+
+@Service
+public class CustomerService {
+
+	@Autowired
+	RentalCameraDetailsRepo rentalCameraDetailsRepo;
+
+	@Autowired
+	RentalRegestrationRepo rentalRegestrationRepo;
+	
+	@Autowired
+	CameraBookingsRepo cameraBookingsRepo;
+	
+	public List<CameraEntity> getRentalsByCity(String request) {
+		List<CameraEntity> response = rentalRegestrationRepo.findByCityAndIsActiveTrue(request);
+		return response;
+	}
+
+	public BookingDetailsRequestBean saveBookingDetails(BookingDetailsRequestBean request) {
+		CameraBookingsEntity CameraBookObj = new CameraBookingsEntity();
+		long min = 100000;  
+		long max = 999999;   
+		long otp = (int)(Math.random()*(max-min+1)+min); 
+		String number = String.valueOf(otp);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");  
+		LocalDateTime now = LocalDateTime.now(); 
+		String odId = "ORD"+dtf.format(now)+number;
+		if(null != request) {
+			CameraBookObj.setEndDate(request.getEndDate());
+			CameraBookObj.setFinalPrice(request.getFinalPrice());
+			CameraBookObj.setOrderId(odId);
+			CameraBookObj.setProductNumber(request.getCameraDetails().getProductNumber());
+			CameraBookObj.setStartDate(request.getStartDate());
+			CameraBookObj.setActive(request.getIsActive());
+			cameraBookingsRepo.save(CameraBookObj);
+		}
+		request.setOrderId(odId);
+		return request;
+	}
+	
+}

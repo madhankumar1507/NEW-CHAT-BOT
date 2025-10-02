@@ -1,0 +1,29 @@
+<div class="login">
+    <h2 class="active"> sign-in </h2>
+    <form>
+        <div class="MainContainer">
+      <input type="text" class="text" name="username" [(ngModel)]="username"/>
+       <span>Email</span>
+       
+      <br/>
+      <input type="password" class="text" name="password" [(ngModel)]="password"/>
+      <span>Password</span>
+      <div *ngIf="k" class="validate0">
+        <span style="color:red" >Please Enter Valid Credentials</span>
+      </div>
+    </div>
+      <br/>
+      <div>
+      <input type="checkbox" id="checkbox-1-1" class="custom-checkbox" />
+      <label for="checkbox-1-1">Keep me Signed in</label>
+      
+      <button class="signin" (click)="Onclick()">
+        Sign In
+      </button>
+    </div>
+      <hr/>
+      <a href="/forgotpass">Forgot Password ? </a>
+      <a href="#"> Register a new account </a>
+    </form>
+  
+  </div>

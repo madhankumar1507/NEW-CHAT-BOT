@@ -1,0 +1,29 @@
+package com.example.demo.Controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.Beans.RentalRegistrationBean;
+import com.example.demo.Entities.CameraEntity;
+import com.example.demo.Services.RentalRegistrationService;
+
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/v1")
+public class CameraRentalController {
+	
+	@Autowired
+	RentalRegistrationService rentalRegistrationService;
+	
+	@PostMapping(value = "/rentalRegistration", produces=MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody CameraEntity Login(@RequestBody RentalRegistrationBean request) {
+		CameraEntity response = rentalRegistrationService.saveRentalDetails(request);
+		return response;
+	}
+}

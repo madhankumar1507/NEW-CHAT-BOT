@@ -1,0 +1,18 @@
+package com.example.demo.Beans;
+
+public class OTPCheck {
+      private String eamilId;
+      private String otp;
+	public String getEamilId() {
+		return eamilId;
+	}
+	public void setEamilId(String eamilId) {
+		this.eamilId = eamilId;
+	}
+	public String getOtp() {
+		return otp;
+	}
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+}

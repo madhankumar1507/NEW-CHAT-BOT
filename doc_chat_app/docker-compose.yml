@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/data:/app/backend/data
+      - ./backend/vectordb:/app/backend/vectordb
+    environment:
+      ADMIN_TOKEN: bfd48123-dfa9-481f-b35f-579ccc5b765c
+      # OMP_NUM_THREADS: 1 # Already set in main.py, but can be overridden here if needed
+      # MKL_NUM_THREADS: 1 # Already set in main.py, but can be overridden here if needed
+    # command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    # The command is already in the Dockerfile, so it's commented out here.
+    # If you want to override the Dockerfile's CMD, uncomment this.
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      # This assumes your React app uses REACT_APP_API_URL for the backend endpoint
+      # Adjust this variable name if your frontend uses a different one.
+      REACT_APP_API_URL: http://localhost:8000 # For local development, use localhost
+      # For communication within docker-compose network, use service name:
+      # REACT_APP_API_URL: http://backend:8000
+    depends_on:
+      - backend
+

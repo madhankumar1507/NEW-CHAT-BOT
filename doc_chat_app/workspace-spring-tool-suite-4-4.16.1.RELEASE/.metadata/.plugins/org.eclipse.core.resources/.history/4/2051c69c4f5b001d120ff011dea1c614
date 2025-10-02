@@ -1,0 +1,59 @@
+package com.example.demo.Services;
+
+
+import java.util.Optional;
+
+import org.hibernate.annotations.common.util.impl.Log_.logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Constants.Constants;
+import com.example.demo.Beans.LoginRequest;
+import com.example.demo.Beans.RegisterRequest;
+import com.example.demo.Entities.AuthenticationEntity;
+import com.example.demo.Repositories.LoginDetailsRepo;
+
+@Service
+public class LoginDetailsServices {
+	@Autowired
+	LoginDetailsRepo loginDetailaRepo;
+	@Autowired(required = false)
+	Constants Constants;
+	
+	//Validation of details entered by user
+	public String getLoginDetails(LoginRequest request) {
+		String response = "";
+		AuthenticationEntity authenticationDetails = loginDetailaRepo.findByEmailIdAndIsActiveTrue(request.getEmailId());
+		if(authenticationDetails!=null) {
+			if(authenticationDetails.getPassword().equals(request.getPassword())) {
+				response = Constants.YES;
+			}
+			else {
+				System.out.print("hello1");
+				response = Constants.NO;
+			}
+		}
+		else {
+			System.out.print("hello");
+			response = Constants.NO;
+		}
+		return response;
+	}
+	
+	//To save Registered details in DB
+	public RegisterRequest saveRegestrationDetails(AuthenticationEntity request) {
+		RegisterRequest registrationDetails = new RegisterRequest();
+		AuthenticationEntity authenticationDetails = loginDetailaRepo.findByEmailIdAndIsActiveTrue(request.getEmailId());
+		if(authenticationDetails==null) {
+			loginDetailaRepo.save(request);
+			registrationDetails.setAuthenticationEntity(request);
+			registrationDetails.setStatus("Regestered Successfully");
+			return registrationDetails;
+			}
+		else {
+			registrationDetails.setStatus("Aleready Registered");
+			return registrationDetails;
+		}
+		
+	}
+}

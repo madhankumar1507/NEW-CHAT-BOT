@@ -1,0 +1,33 @@
+package com.example.demo.Services;
+
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Constants.Constants;
+import com.example.demo.Beans.LoginRequest;
+import com.example.demo.Entities.AuthenticationEntity;
+import com.example.demo.Repositories.LoginDetailsRepo;
+
+@Service
+public class LoginDetailsServices {
+	@Autowired
+	LoginDetailsRepo loginDetailaRepo;
+	@Autowired(required = false)
+	Constants Constants;
+	public String getLoginDetails(LoginRequest request) {
+		String response = "";
+		AuthenticationEntity authenticationDetails = loginDetailaRepo.findByEmailIdAndIsActiveTrue(request.getEmailId());
+		if(authenticationDetails!=null) {
+			if(authenticationDetails.getPassword().equals(request.getPassword())) {
+				response = Constants.YES;
+			}
+			else {
+				response = Constants.NO;
+			}
+		}
+		return response;
+	}
+}

@@ -1,0 +1,8 @@
+package com.example.demo.Beans;
+
+import com.example.demo.Entities.RentalCameraDetailsEntity;
+
+public class BookingDetailsRequestBean {
+    private RentalCameraDetailsEntity CameraDetails;
+    private 
+}

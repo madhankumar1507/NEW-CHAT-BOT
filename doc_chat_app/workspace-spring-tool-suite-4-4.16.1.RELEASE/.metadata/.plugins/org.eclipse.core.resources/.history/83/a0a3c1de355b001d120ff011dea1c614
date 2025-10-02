@@ -1,0 +1,8 @@
+package com.example.demo.Entities;
+
+@Getter
+@Setter
+@Entity(name="tb_Authentication")
+public class AuthenticationEntity {
+
+}
