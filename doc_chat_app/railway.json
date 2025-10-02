@@ -9,9 +9,10 @@
     {
       "name": "backend",
       "repo": ".",
-      "buildCommand": "docker build -t backend-image -f backend/Dockerfile .",
-      "startCommand": "gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT",
+      "buildType": "dockerfile",
+      "dockerfile": "backend/Dockerfile",
       "rootDirectory": "backend",
+      "startCommand": "./start.sh",
       "environment": [
         {
           "key": "PORT",
@@ -22,9 +23,10 @@
     {
       "name": "frontend",
       "repo": ".",
-      "buildCommand": "docker build -t frontend-image -f frontend/Dockerfile .",
-      "startCommand": "nginx -g 'daemon off;'",
+      "buildType": "dockerfile",
+      "dockerfile": "frontend/Dockerfile",
       "rootDirectory": "frontend",
+      "startCommand": "./start.sh",
       "environment": [
         {
           "key": "PORT",
